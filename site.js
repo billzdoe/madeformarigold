@@ -286,10 +286,12 @@
     data.access_key = S.web3formsKey;
     data.subject = subject;
     data.from_name = "Made for Marigold website";
+    var payload = new FormData();
+    Object.keys(data).forEach(function (k) { payload.append(k, data[k]); });
     fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(data)
+      headers: { Accept: "application/json" },
+      body: payload
     }).then(function (res) { return res.json(); }).then(function (json) {
       if (!json.success) throw new Error(json.message || "Not sent");
       form.reset();
