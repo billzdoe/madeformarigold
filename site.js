@@ -216,7 +216,7 @@
   function renderAbout() {
     var about = S.about || {};
     $("about-photo").innerHTML = about.photo
-      ? '<img src="' + esc(about.photo) + '" alt="Brittany Doolittle" loading="lazy">'
+      ? '<img src="' + esc(about.photo) + '" alt="The maker behind Made for Marigold" loading="lazy">'
       : placeholder(4);
     var html = (about.paragraphs || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
     if (about.nameStory) html += '<p class="name-story">' + esc(about.nameStory) + "</p>";

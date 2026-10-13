@@ -3,7 +3,7 @@
   Edit the text between the quotes, save, and refresh the page.
 */
 window.SITE = {
-  // Where order requests go. Change this to the address Brittany actually checks.
+  // Where order requests go. Change this to the address you actually check.
   email: "hello@madeformarigold.com",
 
   // Optional: paste a free access key from https://web3forms.com here and the
@@ -55,10 +55,10 @@ window.SITE = {
   ],
 
   about: {
-    // e.g. "images/brittany.jpg"
+    // e.g. "images/me.jpg"
     photo: "",
     paragraphs: [
-      "Hi, I'm Brittany Doolittle. I make quilts and quilted things at my sewing machine: tote bags, Bible covers, makeup bags, and whatever else I can talk a pile of fabric into becoming.",
+      "Hi! I make quilts and quilted things at my sewing machine: tote bags, Bible covers, makeup bags, and whatever else I can talk a pile of fabric into becoming.",
       "I cut, piece and quilt everything myself, one piece at a time. You can find me at craft fairs through the year, and in between I take custom orders."
     ],
     // The story behind the name. Shown under the paragraphs when filled in.
