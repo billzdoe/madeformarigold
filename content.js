@@ -58,7 +58,7 @@ window.SITE = {
     // e.g. "images/me.jpg"
     photo: "",
     paragraphs: [
-      "Hi! I make quilts and quilted things at my sewing machine: tote bags, Bible covers, makeup bags, and whatever else I can talk a pile of fabric into becoming.",
+      "Hi, I'm Brittany. I make quilts and quilted things at my sewing machine: tote bags, Bible covers, makeup bags, and whatever else I can talk a pile of fabric into becoming.",
       "I cut, piece and quilt everything myself, one piece at a time. You can find me at craft fairs through the year, and in between I take custom orders."
     ],
     // The story behind the name. Shown under the paragraphs when filled in.
