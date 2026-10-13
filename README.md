@@ -12,7 +12,7 @@ Everything you'll normally edit is in **`content.js`**.
 2. In `content.js`, find the piece in `pieces` and set `photo: "images/your-file.jpg"`.
 3. Add a new piece by copying one of the lines and changing the text.
 
-Other fields on a piece: `description`, `price` (e.g. `"$45"`), `status` (`"Available"`, `"Sold"`, `"Made to order"`), `buyUrl` (a Square, Stripe or Etsy checkout link, which adds a "Buy this piece" button), and `featured: true` for a double-size tile.
+Other fields on a piece: `description`, `price` (e.g. `"$45"`; shows "Price coming soon" while empty), `status` (`"Available"` or `"Sold"`), `buyUrl` (a Square, Stripe or Etsy checkout link, which adds a "Buy this piece" button; without one, buyers send a message), and `featured: true` for a double-size tile.
 
 **Add a craft fair**: add a line to `fairs` (there is an example in the file). Past dates disappear on their own.
 
@@ -20,9 +20,9 @@ Other fields on a piece: `description`, `price` (e.g. `"$45"`), `status` (`"Avai
 
 **Email and social links**: `email` and `social` at the top of the file.
 
-## The order form
+## The contact form
 
-Until `web3formsKey` is filled in, the form opens the visitor's email app with their request written out. For requests that send straight from the page, create a free access key at web3forms.com using the inbox that should receive them, and paste it into `web3formsKey`.
+Until `web3formsKey` is filled in, the form opens the visitor's email app with their message written out. For messages that send straight from the page, create a free access key at web3forms.com using the inbox that should receive them, and paste it into `web3formsKey`.
 
 ## Putting it online
 

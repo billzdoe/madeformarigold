@@ -172,26 +172,15 @@ img, svg { display: block; max-width: 100%; }
 }
 .piece-info { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; padding: 0.7rem 0.15rem 0; }
 .piece-title { font-weight: 600; }
-.piece-status { font-size: 0.9rem; color: var(--plum-soft); white-space: nowrap; }
+.piece-price { font-weight: 600; color: var(--mauve-deep); white-space: nowrap; }
+.piece-price.pending { font-weight: 400; font-size: 0.9rem; color: var(--plum-soft); }
+.sold-tag {
+  position: absolute; right: 0.6rem; top: 0.6rem;
+  background: var(--plum); color: var(--paper);
+  font-size: 0.85rem; font-weight: 600; padding: 0.3rem 0.75rem; border-radius: 999px;
+}
+.piece.is-sold .piece-photo img, .piece.is-sold .piece-photo svg { opacity: 0.6; }
 .pieces-empty { grid-column: 1 / -1; color: var(--plum-soft); }
-
-/* ---------- custom order steps ---------- */
-.steps {
-  list-style: none; counter-reset: step; margin: 0 0 2.4rem; padding: 0;
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.2rem;
-}
-.steps li {
-  counter-increment: step;
-  background: var(--paper); border-radius: var(--radius);
-  padding: 1.5rem 1.3rem 1.6rem;
-  outline: 1.5px dashed var(--rose); outline-offset: -8px;
-}
-.steps li::before {
-  content: counter(step);
-  font-family: var(--display); font-size: 2.2rem; line-height: 1; color: var(--apricot);
-  display: block; margin-bottom: 0.7rem;
-}
-.steps p { margin-top: 0.5rem; color: var(--plum-soft); font-size: 1rem; }
 
 /* ---------- fairs ---------- */
 .fairs { list-style: none; margin: 0; padding: 0; }
@@ -267,6 +256,7 @@ img, svg { display: block; max-width: 100%; }
 .pd-photo img, .pd-photo svg { width: 100%; height: 100%; object-fit: cover; }
 .pd-body { padding: 2.5rem 2rem 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
 .pd-body h3 { font-size: 1.9rem; color: var(--mauve-deep); }
+.pd-price { font-family: var(--display); font-size: 1.5rem; color: var(--plum); }
 .pd-meta { color: var(--plum-soft); }
 .pd-body .actions { margin-top: auto; padding-top: 1rem; }
 .pd-close {
@@ -279,7 +269,6 @@ img, svg { display: block; max-width: 100%; }
 /* ---------- smaller screens ---------- */
 @media (max-width: 60rem) {
   .pieces { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 46rem) {
@@ -296,7 +285,6 @@ img, svg { display: block; max-width: 100%; }
   .piece.wide .piece-photo { aspect-ratio: 1 / 1; min-height: 0; flex: none; }
   .piece-info { flex-direction: column; gap: 0; }
 
-  .steps { grid-template-columns: 1fr; }
   .fair { grid-template-columns: 1fr; gap: 0.2rem; }
   .about { grid-template-columns: 1fr; }
   .about-photo { max-width: 16rem; }

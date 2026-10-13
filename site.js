@@ -126,15 +126,15 @@
     pieces.forEach(function (piece, i) {
       if (activeFilter !== "all" && piece.category !== activeFilter) return;
       var wide = piece.featured && activeFilter === "all";
-      var side = piece.price || piece.status || "";
-      html += '<li class="piece' + (wide ? " wide" : "") + '">' +
+      var sold = /^sold$/i.test(piece.status || "");
+      html += '<li class="piece' + (wide ? " wide" : "") + (sold ? " is-sold" : "") + '">' +
         '<button type="button" class="piece-open" data-piece="' + i + '">' +
-        '<span class="piece-photo">' + photoHTML(piece, i) + "</span>" +
+        '<span class="piece-photo">' + photoHTML(piece, i) + (sold ? '<span class="sold-tag">Sold</span>' : "") + "</span>" +
         '<span class="piece-info"><span class="piece-title">' + esc(piece.title) + "</span>" +
-        '<span class="piece-status">' + esc(side) + "</span></span>" +
+        '<span class="piece-price' + (piece.price ? "" : " pending") + '">' + esc(piece.price || "Price coming soon") + "</span></span>" +
         "</button></li>";
     });
-    $("pieces").innerHTML = html || '<li class="pieces-empty">Nothing here yet. Request an order and I can make one for you.</li>';
+    $("pieces").innerHTML = html || '<li class="pieces-empty">Nothing here right now. Send a custom inquiry and I can make one for you.</li>';
   }
 
   $("filters").addEventListener("click", function (e) {
@@ -147,25 +147,19 @@
 
   /* ---------- piece dialog ---------- */
   var dialog = $("piece-dialog");
-  var kindForCategory = {
-    "quilts": "A custom quilt",
-    "totes": "A tote bag",
-    "bible-covers": "A Bible cover",
-    "makeup-bags": "A makeup bag"
-  };
-
   function openPiece(i) {
     var piece = pieces[i];
     if (!piece) return;
     $("pd-photo").innerHTML = photoHTML(piece, i);
     $("pd-title").textContent = piece.title;
-    $("pd-meta").textContent = [categoryLabel(piece.category), piece.price, piece.status].filter(Boolean).join(", ");
+    $("pd-price").textContent = piece.price || "Price coming soon";
+    $("pd-meta").textContent = [categoryLabel(piece.category), piece.status].filter(Boolean).join(", ");
     $("pd-desc").textContent = piece.description || "";
     var sold = /^sold$/i.test(piece.status || "");
     var actions = "";
     if (piece.buyUrl && !sold) actions += '<a class="btn" href="' + esc(piece.buyUrl) + '" target="_blank" rel="noopener">Buy this piece</a>';
     actions += '<button type="button" class="btn' + (piece.buyUrl && !sold ? " btn-quiet" : "") + '" data-ask="' + i + '">' +
-      (sold ? "Ask for one like it" : "Ask about this piece") + "</button>";
+      (sold ? "Ask for one like it" : (piece.buyUrl ? "Ask a question" : "Ask to buy this piece")) + "</button>";
     $("pd-actions").innerHTML = actions;
     if (dialog.showModal) dialog.showModal(); else dialog.setAttribute("open", "");
   }
@@ -181,10 +175,11 @@
     if (!ask) return;
     var piece = pieces[Number(ask.getAttribute("data-ask"))];
     dialog.close();
-    $("f-kind").value = kindForCategory[piece.category] || "A piece from the gallery";
+    var sold = /^sold$/i.test(piece.status || "");
+    $("f-kind").value = sold ? "A custom piece" : "Buying a piece from the shop";
     var message = $("f-message");
-    if (!message.value) message.value = "I'm interested in the " + piece.title + ". ";
-    $("order").scrollIntoView();
+    if (!message.value) message.value = (sold ? "I'd like one like the " : "I'd like to buy the ") + piece.title + (piece.price ? " (" + piece.price + ")" : "") + ". ";
+    $("contact").scrollIntoView();
     $("f-name").focus({ preventScroll: true });
   });
 
@@ -256,7 +251,7 @@
       if (bad && !firstBad) firstBad = el;
     });
     if (firstBad) {
-      setStatus("Add your name, a working email and a few words about what you'd like.", true);
+      setStatus("Add your name, a working email and a message.", true);
       firstBad.focus();
       return;
     }
@@ -266,30 +261,26 @@
       name: $("f-name").value.trim(),
       email: $("f-email").value.trim(),
       kind: $("f-kind").value,
-      needed_by: $("f-date").value,
-      colors: $("f-colors").value.trim(),
       message: $("f-message").value.trim()
     };
-    var subject = "Order request: " + data.kind + " (" + data.name + ")";
+    var subject = "Website message: " + data.kind + " (" + data.name + ")";
 
     if (!S.web3formsKey) {
       var body = [
         "Name: " + data.name,
         "Email: " + data.email,
-        "Looking for: " + data.kind,
-        data.needed_by ? "Needed by: " + data.needed_by : "",
-        data.colors ? "Colors or fabrics: " + data.colors : "",
+        "About: " + data.kind,
         "",
         data.message
-      ].filter(function (line, i) { return line || i === 5; }).join("\n");
+      ].join("\n");
       window.location.href = "mailto:" + S.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      setStatus("Your email app should have opened with your request filled in. Press send there to finish.");
+      setStatus("Your email app should have opened with your message filled in. Press send there to finish.");
       return;
     }
 
     var button = form.querySelector("button[type=submit]");
     button.disabled = true;
-    setStatus("Sending your request…");
+    setStatus("Sending your message…");
     data.access_key = S.web3formsKey;
     data.subject = subject;
     data.from_name = "Made for Marigold website";
@@ -300,9 +291,9 @@
     }).then(function (res) { return res.json(); }).then(function (json) {
       if (!json.success) throw new Error(json.message || "Not sent");
       form.reset();
-      setStatus("Request sent. I'll write back to " + data.email + " soon.");
+      setStatus("Message sent. I'll write back to " + data.email + " soon.");
     }).catch(function () {
-      setStatus("The request didn't send. Try again, or email " + S.email + " directly.", true);
+      setStatus("The message didn't send. Try again, or email " + S.email + " directly.", true);
     }).then(function () { button.disabled = false; });
   });
 

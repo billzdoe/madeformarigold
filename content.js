@@ -3,11 +3,11 @@
   Edit the text between the quotes, save, and refresh the page.
 */
 window.SITE = {
-  // Where order requests go. Change this to the address you actually check.
+  // Where messages from the site go. Change this to the address you actually check.
   email: "hello@madeformarigold.com",
 
   // Optional: paste a free access key from https://web3forms.com here and the
-  // order form will send straight to the inbox above. While it is empty, the
+  // contact form will send straight to the inbox above. While it is empty, the
   // form opens the visitor's own email app with the request filled in.
   web3formsKey: "",
 
@@ -29,22 +29,22 @@ window.SITE = {
     The gallery. One entry per piece.
       photo    — put the picture in the "images" folder and write "images/your-file.jpg".
                  Leave "" and a quilt-block pattern shows instead.
-      price    — e.g. "$45". Leave "" to hide it.
-      status   — "Available", "Sold", or "Made to order".
+      price    — e.g. "$45". While it is "" the piece shows "Price coming soon".
+      status   — "Available" or "Sold". Sold pieces get a Sold tag.
       buyUrl   — optional checkout link (Square, Stripe, Etsy). When set, the piece
-                 gets a "Buy this piece" button.
+                 gets a "Buy this piece" button. Without one, buyers send a message.
       featured — true makes the tile double size.
   */
   pieces: [
-    { title: "Throw quilt", category: "quilts", photo: "", description: "", price: "", status: "Made to order", buyUrl: "", featured: true },
-    { title: "Quilted tote bag", category: "totes", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" },
-    { title: "Bible cover", category: "bible-covers", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" },
-    { title: "Makeup bag", category: "makeup-bags", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" },
-    { title: "Baby quilt", category: "quilts", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" },
-    { title: "Market tote", category: "totes", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" },
-    { title: "Zippered makeup bag", category: "makeup-bags", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" },
-    { title: "Bible cover with handle", category: "bible-covers", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" },
-    { title: "Lap quilt", category: "quilts", photo: "", description: "", price: "", status: "Made to order", buyUrl: "" }
+    { title: "Throw quilt", category: "quilts", photo: "", description: "", price: "", status: "Available", buyUrl: "", featured: true },
+    { title: "Quilted tote bag", category: "totes", photo: "", description: "", price: "", status: "Available", buyUrl: "" },
+    { title: "Bible cover", category: "bible-covers", photo: "", description: "", price: "", status: "Available", buyUrl: "" },
+    { title: "Makeup bag", category: "makeup-bags", photo: "", description: "", price: "", status: "Available", buyUrl: "" },
+    { title: "Baby quilt", category: "quilts", photo: "", description: "", price: "", status: "Available", buyUrl: "" },
+    { title: "Market tote", category: "totes", photo: "", description: "", price: "", status: "Available", buyUrl: "" },
+    { title: "Zippered makeup bag", category: "makeup-bags", photo: "", description: "", price: "", status: "Available", buyUrl: "" },
+    { title: "Bible cover with handle", category: "bible-covers", photo: "", description: "", price: "", status: "Available", buyUrl: "" },
+    { title: "Lap quilt", category: "quilts", photo: "", description: "", price: "", status: "Available", buyUrl: "" }
   ],
 
   /*
