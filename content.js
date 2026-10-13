@@ -49,9 +49,12 @@ window.SITE = {
 
   /*
     Craft fairs. Past dates drop off the page on their own. Example entry:
-      { date: "2026-11-14", name: "Holiday Makers Market", place: "Community Center, Your Town", note: "Booth 12, 9am to 3pm" },
+      { date: "2026-11-14", name: "Holiday Makers Market", place: "Community Center, Your Town", note: "Booth 12, 9am to 3pm", url: "https://the-fair-website.com" },
+    The url is optional; it turns the fair name into a link.
   */
   fairs: [
+    { date: "2026-11-14", name: "Celebration of Lights", place: "Downtown Shelbyville, Kentucky", note: "3pm to 8pm", url: "https://www.shelbymainstreet.com/celebrationoflights" },
+    { date: "2026-11-21", name: "Once Upon a Christmas Gift Show", place: "Shelbyville Conference & Visitors Center, 219 7th Street, Shelbyville, Kentucky", note: "10am to 3pm", url: "https://www.eventeny.com/events/christmasgift-31326/" }
   ],
 
   about: {

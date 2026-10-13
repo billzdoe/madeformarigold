@@ -201,7 +201,9 @@
     $("fair-list").innerHTML = upcoming.map(function (entry) {
       var date = entry.when.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
       return '<li class="fair"><span class="fair-date">' + esc(date) + "</span><span>" +
-        '<span class="fair-name">' + esc(entry.fair.name) + "</span><br>" +
+        '<span class="fair-name">' + (entry.fair.url
+          ? '<a href="' + esc(entry.fair.url) + '" target="_blank" rel="noopener">' + esc(entry.fair.name) + "</a>"
+          : esc(entry.fair.name)) + "</span><br>" +
         '<span class="fair-detail">' + esc([entry.fair.place, entry.fair.note].filter(Boolean).join(". ")) + "</span>" +
         "</span></li>";
     }).join("");
