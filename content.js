@@ -4,7 +4,7 @@
 */
 window.SITE = {
   // Where messages from the site go. Change this to the address you actually check.
-  email: "hello@madeformarigold.com",
+  email: "madeformarigold@gmail.com",
 
   // Optional: paste a free access key from https://web3forms.com here and the
   // contact form will send straight to the inbox above. While it is empty, the
