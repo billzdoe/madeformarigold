@@ -9,7 +9,7 @@ window.SITE = {
   // Optional: paste a free access key from https://web3forms.com here and the
   // contact form will send straight to the inbox above. While it is empty, the
   // form opens the visitor's own email app with the request filled in.
-  web3formsKey: "",
+  web3formsKey: "b5c9f8df-f301-42eb-ad65-381a26879066",
 
   // Full links, e.g. "https://www.instagram.com/yourname". Empty ones are hidden.
   social: {
