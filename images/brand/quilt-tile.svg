@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="132" viewBox="0 0 132 132">
+  <!-- One block of the Made for Marigold quilt: 3x3 patches, cream sashing on the right and bottom, gold cornerstone. Repeats seamlessly. -->
+  <rect width="132" height="132" fill="#FBF7F2"/>
+  <rect width="120" height="120" fill="#FFFFFF"/>
+  <g fill="#61666A">
+    <rect x="0" y="0" width="40" height="40"/>
+    <rect x="80" y="0" width="40" height="40"/>
+    <rect x="0" y="80" width="40" height="40"/>
+    <rect x="80" y="80" width="40" height="40"/>
+  </g>
+  <rect x="40" y="40" width="40" height="40" fill="#F3D5C3"/>
+  <g fill="#C98B7B">
+    <polygon points="40,0 80,0 60,20"/>
+    <polygon points="40,40 80,40 60,20"/>
+    <polygon points="40,80 80,80 60,100"/>
+    <polygon points="40,120 80,120 60,100"/>
+    <polygon points="0,40 0,80 20,60"/>
+    <polygon points="40,40 40,80 20,60"/>
+    <polygon points="80,40 80,80 100,60"/>
+    <polygon points="120,40 120,80 100,60"/>
+  </g>
+  <rect x="120" y="120" width="12" height="12" fill="#E8C45A"/>
+</svg>

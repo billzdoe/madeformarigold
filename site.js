@@ -11,93 +11,70 @@
   }
 
   /* ---------- quilt blocks ----------
-     Each pattern is a grid of patches. "a" is a plain square in colour a.
-     "ab1" / "ab2" is a half-square triangle: colour a sits in the lower
-     triangle, b in the upper; 1 and 2 are the two diagonal directions. */
+     The block from the logo quilt: dark corners, hourglass patches and a
+     centre square, with cream sashing and a gold cornerstone. Each palette
+     is [corners, hourglass points, centre]; the rest of the patch is white. */
   var C = {
-    peach: "#FBCDB2", apricot: "#F4A582", rose: "#E3A6AE", lilac: "#D6C1DC",
-    mauve: "#A66F86", paper: "#FFFAF6", blush: "#FFE3D3", marigold: "#EBA937"
+    slate: "#61666A", terra: "#C98B7B", peach: "#F3D5C3", sage: "#8DA483",
+    gold: "#E8C45A", cream: "#FBF7F2", white: "#FFFFFF"
   };
-
-  var PATTERNS = {
-    star: ["c ac1 ac2 c", "ca1 b b ca2", "ac2 b b ac1", "c ca2 ca1 c"],
-    pinwheel: ["ab1 ba2", "ab2 ba1"],
-    shoofly: ["ac2 b ac1", "b a b", "ca1 b ca2"],
-    diamond: ["ab2 ab1", "ba1 ba2"],
-    ninepatch: ["a c a", "c b c", "a c a"],
-    checker: ["a b", "b a"]
-  };
-  var PATTERN_NAMES = Object.keys(PATTERNS);
 
   var PALETTES = [
-    [C.apricot, C.rose, C.paper],
-    [C.mauve, C.peach, C.paper],
-    [C.rose, C.lilac, C.paper],
-    [C.peach, C.mauve, C.blush],
-    [C.lilac, C.apricot, C.paper],
-    [C.rose, C.peach, C.paper]
+    [C.slate, C.terra, C.peach],
+    [C.terra, C.slate, C.peach],
+    [C.sage, C.terra, C.cream],
+    [C.slate, C.peach, C.gold],
+    [C.peach, C.terra, C.slate],
+    [C.sage, C.slate, C.peach]
   ];
 
-  function block(name, pal, x0, y0, size) {
-    var rows = PATTERNS[name].map(function (r) { return r.split(" "); });
-    var u = size / rows.length;
-    var key = { a: pal[0], b: pal[1], c: pal[2] };
-    var out = "";
-    rows.forEach(function (row, r) {
-      row.forEach(function (cell, c) {
-        var x = x0 + c * u, y = y0 + r * u, X = x + u, Y = y + u;
-        var base = cell.length === 1 ? key[cell] : key[cell[1]];
-        out += '<rect x="' + x + '" y="' + y + '" width="' + (u + 0.4) + '" height="' + (u + 0.4) + '" fill="' + base + '"/>';
-        if (cell.length === 3) {
-          var pts = cell[2] === "1"
-            ? x + "," + y + " " + x + "," + Y + " " + X + "," + Y
-            : X + "," + y + " " + X + "," + Y + " " + x + "," + Y;
-          out += '<polygon points="' + pts + '" fill="' + key[cell[0]] + '"/>';
-        }
-      });
+  // One block, 3 units square, drawn at x0,y0 with unit u.
+  function block(pal, x0, y0, u) {
+    var out = '<rect x="' + x0 + '" y="' + y0 + '" width="' + 3 * u + '" height="' + 3 * u + '" fill="' + C.white + '"/>';
+    [[0, 0], [2, 0], [0, 2], [2, 2]].forEach(function (p) {
+      out += '<rect x="' + (x0 + p[0] * u) + '" y="' + (y0 + p[1] * u) + '" width="' + u + '" height="' + u + '" fill="' + pal[0] + '"/>';
+    });
+    out += '<rect x="' + (x0 + u) + '" y="' + (y0 + u) + '" width="' + u + '" height="' + u + '" fill="' + pal[2] + '"/>';
+    var h = u / 2, pts = [];
+    // hourglasses above and below the centre point up and down
+    [0, 2].forEach(function (r) {
+      var x = x0 + u, y = y0 + r * u;
+      pts.push([x, y, x + u, y, x + h, y + h], [x, y + u, x + u, y + u, x + h, y + h]);
+    });
+    // hourglasses beside the centre point left and right
+    [0, 2].forEach(function (c) {
+      var x = x0 + c * u, y = y0 + u;
+      pts.push([x, y, x, y + u, x + h, y + h], [x + u, y, x + u, y + u, x + h, y + h]);
+    });
+    pts.forEach(function (t) {
+      out += '<polygon points="' + t[0] + "," + t[1] + " " + t[2] + "," + t[3] + " " + t[4] + "," + t[5] + '" fill="' + pal[1] + '"/>';
     });
     return out;
   }
 
-  // Stand-in art for a piece that has no photo yet.
+  // Stand-in art for a piece that has no photo yet: four blocks with sashing.
   function placeholder(i) {
-    var name = PATTERN_NAMES[i % PATTERN_NAMES.length];
     var pal = PALETTES[i % PALETTES.length];
-    var out = '<svg viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" role="img" aria-label="Quilt block pattern">';
+    var u = 20, s = 8, step = 3 * u + s, size = 2 * step + s;
+    var off = -step / 2;
+    var out = '<svg viewBox="0 0 ' + size + " " + size + '" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Quilt block pattern">';
+    out += '<rect width="' + size + '" height="' + size + '" fill="' + C.cream + '"/>';
     for (var r = 0; r < 3; r++) {
-      for (var c = 0; c < 3; c++) out += block(name, pal, c * 40, r * 40, 40);
+      for (var c = 0; c < 3; c++) {
+        var x = off + s + c * step, y = off + s + r * step;
+        out += block(pal, x, y, u);
+        out += '<rect x="' + (x - s) + '" y="' + (y - s) + '" width="' + s + '" height="' + s + '" fill="' + C.gold + '"/>';
+      }
     }
     return out + "</svg>";
   }
 
-  function heroQuilt() {
-    var layout = [
-      ["star", "pinwheel", "shoofly", "diamond"],
-      ["ninepatch", "star", "pinwheel", "star"],
-      ["pinwheel", "diamond", "star", "shoofly"],
-      ["star", "shoofly", "ninepatch", "pinwheel"],
-      ["diamond", "star", "pinwheel", "star"]
-    ];
-    var size = 100, gap = 6, edge = 20;
-    var w = edge * 2 + 4 * size + 3 * gap;
-    var h = edge * 2 + 5 * size + 4 * gap;
-    var out = '<svg viewBox="0 0 ' + w + " " + h + '">';
-    out += '<rect width="' + w + '" height="' + h + '" rx="10" fill="' + C.mauve + '"/>';
-    out += '<rect x="' + (edge - 4) + '" y="' + (edge - 4) + '" width="' + (w - 2 * edge + 8) + '" height="' + (h - 2 * edge + 8) + '" fill="' + C.paper + '"/>';
-    layout.forEach(function (row, r) {
-      row.forEach(function (name, c) {
-        var n = r * 4 + c;
-        // the one marigold patch, for the name
-        var pal = (r === 2 && c === 2) ? [C.apricot, C.marigold, C.paper] : PALETTES[(n + r) % PALETTES.length];
-        var x = edge + c * (size + gap), y = edge + r * (size + gap);
-        out += '<g class="blk" style="animation-delay:' + (n * 45) + 'ms">' + block(name, pal, x, y, size) + "</g>";
-      });
-    });
-    out += '<rect x="9" y="9" width="' + (w - 18) + '" height="' + (h - 18) + '" rx="5" fill="none" stroke="' + C.paper + '" stroke-opacity="0.7" stroke-width="1.5" stroke-dasharray="6 5"/>';
-    return out + "</svg>";
-  }
-
-  $("hero-quilt").innerHTML = heroQuilt();
+  /* ---------- ribbon under the hero ---------- */
+  (function () {
+    var words = (S.categories || []).map(function (c) { return c.label; }).concat(["Sewn one at a time", "Handmade with care"]);
+    var run = words.map(function (w) { return "<span>" + esc(w) + "</span>"; }).join("");
+    $("ribbon").innerHTML = run + run + run + run;
+  })();
 
   /* ---------- gallery ---------- */
   var pieces = S.pieces || [];
@@ -199,14 +176,26 @@
       return;
     }
     $("fair-list").innerHTML = upcoming.map(function (entry) {
-      var date = entry.when.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-      return '<li class="fair"><span class="fair-date">' + esc(date) + "</span><span>" +
+      var w = entry.when;
+      var full = w.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+      return '<li class="fair reveal">' +
+        '<time class="fair-date" datetime="' + esc(entry.fair.date) + '" aria-label="' + esc(full) + '">' +
+        '<span class="fair-month">' + esc(w.toLocaleDateString("en-US", { month: "short" })) + "</span>" +
+        '<span class="fair-day">' + w.getDate() + "</span>" +
+        '<span class="fair-weekday">' + esc(w.toLocaleDateString("en-US", { weekday: "short" })) + "</span></time>" +
+        "<span>" +
         '<span class="fair-name">' + (entry.fair.url
           ? '<a href="' + esc(entry.fair.url) + '" target="_blank" rel="noopener">' + esc(entry.fair.name) + "</a>"
-          : esc(entry.fair.name)) + "</span><br>" +
+          : esc(entry.fair.name)) + "</span>" +
         '<span class="fair-detail">' + esc([entry.fair.place, entry.fair.note].filter(Boolean).join(". ")) + "</span>" +
         "</span></li>";
     }).join("");
+
+    var next = upcoming[0];
+    var link = $("next-fair");
+    link.innerHTML = "<span>Next craft fair: <strong>" + esc(next.fair.name) + "</strong>, " +
+      esc(next.when.toLocaleDateString("en-US", { month: "short", day: "numeric" })) + "</span>";
+    link.hidden = false;
   }
 
   /* ---------- about ---------- */
@@ -214,7 +203,7 @@
     var about = S.about || {};
     $("about-photo").innerHTML = about.photo
       ? '<img src="' + esc(about.photo) + '" alt="The maker behind Made for Marigold" loading="lazy">'
-      : placeholder(4);
+      : '<span class="flower"></span>';
     var html = (about.paragraphs || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
     if (about.nameStory) html += '<p class="name-story">' + esc(about.nameStory) + "</p>";
     $("about-body").innerHTML = html;
@@ -306,4 +295,27 @@
   renderFairs();
   renderAbout();
   renderFooter();
+
+  /* ---------- reveal on scroll ---------- */
+  var seen = typeof IntersectionObserver === "function" && new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("in");
+      seen.unobserve(entry.target);
+    });
+  }, { rootMargin: "0px 0px -8% 0px" });
+
+  function watch() {
+    var items = document.querySelectorAll(".reveal:not(.in), .piece:not(.in)");
+    Array.prototype.forEach.call(items, function (el, i) {
+      if (!seen) { el.classList.add("in"); return; }
+      if (el.classList.contains("piece")) el.style.transitionDelay = (i % 4) * 70 + "ms";
+      seen.observe(el);
+    });
+  }
+  watch();
+  // pieces redrawn by a filter click are already on screen
+  $("filters").addEventListener("click", function () {
+    Array.prototype.forEach.call(document.querySelectorAll(".piece"), function (el) { el.classList.add("in"); });
+  });
 })();

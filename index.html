@@ -3,113 +3,149 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Made for Marigold | Handmade quilts and quilted goods</title>
+  <title>Made for Marigold | Handmade quilted goods</title>
   <meta name="description" content="Handmade quilts, quilted tote bags, Bible covers and makeup bags. Shop finished pieces or ask about a custom one.">
   <meta property="og:title" content="Made for Marigold">
-  <meta property="og:description" content="Handmade quilts and quilted goods, priced and ready to go home.">
+  <meta property="og:description" content="Handmade quilted goods, sewn one at a time.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://madeformarigold.com/">
-  <meta name="theme-color" content="#FFF1E8">
+  <meta property="og:image" content="https://madeformarigold.com/images/brand/medallion.png">
+  <meta name="theme-color" content="#8DA483">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Playfair+Display:ital,wght@0,400..700;1,400..600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
   <a class="skip" href="#shop">Skip to the shop</a>
 
   <header class="top">
-    <a class="wordmark" href="#home">Made for Marigold</a>
+    <a class="wordmark" href="#home"><span class="mark" aria-hidden="true"></span>Made for Marigold</a>
     <nav aria-label="Main">
       <a href="#fairs">Craft fairs</a>
       <a href="#about">About</a>
       <a href="#contact">Custom inquiry</a>
-      <a class="nav-order" href="#shop">Shop</a>
+      <a class="nav-shop" href="#shop">Shop</a>
     </nav>
   </header>
 
   <main id="home">
     <section class="hero">
-      <div class="hero-text">
-        <h1>Quilts and quilted things, sewn one at a time.</h1>
-        <p class="lede">Quilts, tote bags, Bible covers and makeup bags, all made by hand and priced as marked.</p>
-        <div class="actions">
-          <a class="btn" href="#shop">Shop the pieces</a>
+      <div class="quilt hero-quilt">
+        <div class="hero-inner">
+          <figure class="medallion">
+            <img src="images/brand/medallion.png" width="720" height="848" alt="Made for Marigold">
+            <figcaption>Handmade Quilted Goods</figcaption>
+          </figure>
+          <div class="hero-card reveal">
+            <p class="eyebrow">Handmade with care</p>
+            <h1>Quilts and quilted things, sewn <em>one at a time.</em></h1>
+            <p class="lede">Quilts, tote bags, Bible covers and makeup bags, all made by hand and priced as marked.</p>
+            <div class="actions">
+              <a class="btn" href="#shop">Shop the pieces</a>
+            </div>
+            <a class="next-fair" id="next-fair" href="#fairs" hidden></a>
+          </div>
         </div>
       </div>
-      <div class="hero-quilt" id="hero-quilt" aria-hidden="true"></div>
     </section>
+
+    <div class="ribbon" aria-hidden="true">
+      <div class="ribbon-track" id="ribbon"></div>
+    </div>
 
     <section class="band" id="shop">
       <div class="wrap">
-        <h2>The shop</h2>
-        <p class="intro">Finished pieces, each one priced as marked. Tap one to see it up close.</p>
+        <div class="head reveal">
+          <p class="eyebrow">The shop</p>
+          <h2>Finished pieces, <em>ready to love</em></h2>
+          <p class="intro">Each one is priced as marked. Tap a piece to see it up close.</p>
+        </div>
         <div class="filters" id="filters" role="group" aria-label="Show a kind of piece"></div>
         <ul class="pieces" id="pieces"></ul>
       </div>
     </section>
 
-    <section class="band band-tint" id="fairs">
+    <section class="band band-taupe" id="fairs">
+      <div class="flower flower-fairs" aria-hidden="true"></div>
+      <div class="flower flower-fairs two" aria-hidden="true"></div>
       <div class="wrap narrow">
-        <h2>Find me at a craft fair</h2>
-        <p class="intro">The best way to see the stitching up close. Come say hello.</p>
+        <div class="head reveal">
+          <p class="eyebrow">Out and about</p>
+          <h2>Find me at a <em>craft fair</em></h2>
+          <p class="intro">The best way to see the stitching up close. Come say hello.</p>
+        </div>
         <ul class="fairs" id="fair-list"></ul>
       </div>
     </section>
 
     <section class="band" id="about">
       <div class="wrap about">
-        <div class="about-photo" id="about-photo"></div>
-        <div class="about-text">
+        <div class="about-frame reveal">
+          <div class="about-photo" id="about-photo"></div>
+        </div>
+        <div class="about-text reveal">
+          <p class="eyebrow">The maker</p>
           <h2>About me</h2>
           <div id="about-body"></div>
         </div>
       </div>
     </section>
 
-    <section class="band band-tint" id="contact">
-      <div class="wrap narrow">
-        <h2>Ask about a piece</h2>
-        <p class="intro">Want something from the shop, or have a custom piece in mind? Send a note and I'll write back.</p>
-        <form class="order-form" id="order-form" novalidate>
-          <div class="field">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required>
+    <section class="band band-quilt" id="contact">
+      <div class="quilt contact-quilt">
+        <div class="wrap narrow">
+          <div class="contact-card reveal">
+            <div class="head">
+              <p class="eyebrow">Custom inquiry</p>
+              <h2>Ask about a <em>piece</em></h2>
+              <p class="intro">Want something from the shop, or have a custom piece in mind? Send a note and I'll write back.</p>
+            </div>
+            <form class="order-form" id="order-form" novalidate>
+              <div class="field">
+                <label for="f-name">Your name</label>
+                <input id="f-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="field full">
+                <label for="f-kind">What is this about?</label>
+                <select id="f-kind" name="kind">
+                  <option>Buying a piece from the shop</option>
+                  <option>A custom piece</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="f-message">Your message</label>
+                <textarea id="f-message" name="message" rows="5" required></textarea>
+              </div>
+              <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <div class="field full form-foot">
+                <button class="btn" type="submit">Send message</button>
+                <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+              </div>
+            </form>
           </div>
-          <div class="field">
-            <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div class="field full">
-            <label for="f-kind">What is this about?</label>
-            <select id="f-kind" name="kind">
-              <option>Buying a piece from the shop</option>
-              <option>A custom piece</option>
-              <option>Something else</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label for="f-message">Your message</label>
-            <textarea id="f-message" name="message" rows="5" required></textarea>
-          </div>
-          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="field full form-foot">
-            <button class="btn" type="submit">Send message</button>
-            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
+        </div>
       </div>
     </section>
   </main>
 
-  <div class="binding" aria-hidden="true"></div>
   <footer class="foot">
     <div class="wrap foot-inner">
-      <p class="wordmark">Made for Marigold</p>
-      <p><a id="foot-email" href="#contact"></a></p>
-      <p class="social" id="social"></p>
-      <p class="fine">&copy; <span id="year"></span> Made for Marigold. Handmade with care.</p>
+      <img class="foot-medallion" src="images/brand/medallion.png" width="720" height="848" alt="" loading="lazy">
+      <div class="foot-text">
+        <p class="foot-word">Made for Marigold</p>
+        <p class="foot-tag">Handmade Quilted Goods</p>
+        <p><a id="foot-email" href="#contact"></a></p>
+        <p class="social" id="social"></p>
+        <p class="fine">&copy; <span id="year"></span> Made for Marigold. Handmade with care.</p>
+      </div>
     </div>
   </footer>
 
@@ -117,9 +153,9 @@
     <form method="dialog"><button class="pd-close" aria-label="Close">&times;</button></form>
     <div class="pd-photo" id="pd-photo"></div>
     <div class="pd-body">
+      <p class="eyebrow" id="pd-meta"></p>
       <h3 id="pd-title"></h3>
       <p class="pd-price" id="pd-price"></p>
-      <p class="pd-meta" id="pd-meta"></p>
       <p id="pd-desc"></p>
       <div class="actions" id="pd-actions"></div>
     </div>

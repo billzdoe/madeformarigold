@@ -24,6 +24,10 @@ Other fields on a piece: `description`, `price` (e.g. `"$45"`; shows "Price comi
 
 Until `web3formsKey` is filled in, the form opens the visitor's email app with their message written out. For messages that send straight from the page, create a free access key at web3forms.com using the inbox that should receive them, and paste it into `web3formsKey`.
 
+## Brand files
+
+`images/brand/` holds the logo pieces the design uses: `medallion.png` (the oval logo), `marigold-line.png` (the flower line art, tinted by CSS), `quilt-tile.svg` (one block of the logo quilt; it repeats as the background) and `logo-original.png` (the full logo as designed).
+
 ## Putting it online
 
 Any static host works (Netlify, Cloudflare Pages, GitHub Pages, Render). Upload this folder as-is, then point madeformarigold.com at the host from the domain registrar's DNS settings.
