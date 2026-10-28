@@ -61,8 +61,13 @@ window.SITE = {
     // e.g. "images/me.jpg"
     photo: "",
     paragraphs: [
-      "Hi, I'm Brittany. I make quilts and quilted things at my sewing machine: tote bags, Bible covers, makeup bags, and whatever else I can talk a pile of fabric into becoming.",
-      "I cut, piece and quilt everything myself, one piece at a time. You can find me at craft fairs through the year, and in between I take custom orders."
+      "Hello new friend! My name is Brittany and Made for Marigold is a product of a simple desire to make a baby quilt.",
+      "Early summer of 2023, with only the experience of turning on a sewing machine and making simple curtains, I endeavored to make a quilt for my soon expected baby. In just a few weeks I would find out the gender but picked out fabrics for a girl quilt with the hope I'd get to use them.",
+      "Although we did find out our sweet baby was a girl, we also found out she had a neural tube disorder called anencephaly and would not survive. As devastating as this was, I did not give up on my hope to make that quilt.",
+      "I had a dream of friends and family joining in making the quilt as we prayed for our Amelia Marie. This was the beginning - a prayer quilt. Each person would hand sew a simple quilt block together and pray for my Amelia, and I would put them all together into a large quilt. This quilt came to the hospital with me and wrapped me in comfort in the weeks of grieving that followed.",
+      "From there, I was hooked. Making prayer quilts for others experiencing difficult circumstances. And then gifting all kinds of creations to show my love for friends and family.",
+      "And here we are. Made for Marigold. Creating things to bring others comfort and joy in honor of my beautiful daughter.",
+      "I'm glad you're here! Enjoy something for yourself, or gift to another. Everything is made with a ton of love (and a little creative frustration haha)."
     ],
     // The story behind the name. Shown under the paragraphs when filled in.
     nameStory: ""
